@@ -42,43 +42,62 @@ public class Deck{
     }
 
     public String Suffle(){
-        System.out.println("\nShuffle");
-        Collections.shuffle(list1);
-        System.out.println("El deck a sido mezclado");
-        return "El deck a sido mezclado";
+        if(list1.isEmpty()){
+            return "El deck esta vaciío";
+        }else{
+            System.out.println("\nShuffle");
+            Collections.shuffle(list1);
+            System.out.println("El deck a sido mezclado");
+            return "El deck a sido mezclado";
+        }
     }
+
     public String Head(){
-        System.out.println("\nHead");
-        Card c= list1.get(1);
-        System.out.println(c);
-        list1.remove(1);
-        System.out.println(String.format("Quedan %s cartas en el Deck",list1.toArray().length));
-        return String.format("%s \n Quedan %s cartas en el Deck",c,list1.toArray().length);
+        if(list1.isEmpty()){
+            return "El deck esta vaciío";
+        }else {
+            System.out.println("\nHead");
+            Card c = list1.get(1);
+            System.out.println(c);
+            list1.remove(1);
+            System.out.println(String.format("Quedan %s cartas en el Deck", list1.toArray().length));
+            return String.format("%s \n Quedan %s cartas en el Deck", c, list1.toArray().length);
+        }
     }
+
     public String Pick(){
-        System.out.println("\nPick");
-        int aleatorio = (int) Math.floor(Math.random()*(0-53+1)+53);
-        System.out.println(aleatorio);
-        if(list1.toArray().length<aleatorio){
-            aleatorio=list1.toArray().length;
+        if(list1.isEmpty()){
+            return "El deck esta vaciío";
+        }else {
+            System.out.println("\nPick");
+            int aleatorio = (int) Math.floor(Math.random() * (0 - 53 + 1) + 53);
+            System.out.println(aleatorio);
+            if (list1.toArray().length < aleatorio) {
+                aleatorio = list1.toArray().length;
+            }
+            Card c = list1.get(aleatorio);
+            System.out.println(c);
+            list1.remove(aleatorio);
+            System.out.println("Quedan" + list1.toArray().length + " cartas en el Deck");
+            String.format("Quedan %s cartas en el Deck", list1.toArray().length);
+            return String.format("%s \n Quedan %s cartas en el Deck", c, list1.toArray().length);
         }
-        Card c = list1.get(aleatorio);
-        System.out.println(c);
-        list1.remove(aleatorio);
-        System.out.println("Quedan" + list1.toArray().length + " cartas en el Deck");
-        String.format("Quedan %s cartas en el Deck",list1.toArray().length);
-        return String.format("%s \n Quedan %s cartas en el Deck",c,list1.toArray().length);
     }
+
     public String Hand(){
-        System.out.println("\nHand");
-        String msg="";
-        for(int x=0;x<5;x++){
-            Card c = list1.get(x);
-            msg += c.toString()+"\n";
-            System.out.println();
-            list1.remove(x);
+        if(list1.isEmpty()){
+            return "El deck esta vaciío";
+        }else {
+            System.out.println("\nHand");
+            String msg = "";
+            for (int x = 0; x < 5; x++) {
+                Card c = list1.get(x);
+                msg += c.toString() + "\n";
+                System.out.println();
+                list1.remove(x);
+            }
+            System.out.println(String.format("%s Quedan %s", msg, list1.toArray().length));
+            return String.format("%s Quedan %s cartas en el Deck", msg, list1.toArray().length);
         }
-        System.out.println(String.format("%s Quedan %s",msg,list1.toArray().length));
-        return String.format("%s Quedan %s cartas en el Deck",msg,list1.toArray().length);
     }
 }
